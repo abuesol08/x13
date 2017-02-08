@@ -1,0 +1,19 @@
+      CHARACTER DSPDIC*1001
+      INTEGER dspptr
+      DIMENSION dspptr(0:PDSP)
+      PARAMETER(DSPDIC='spectrum of the original seriesspectrum of the r
+     &egARIMA model residualsspectrum of differenced seasonally adjusted
+     & seriesspectrum of modified irregular seriesspectrum of the season
+     &ally adjusted series (SEATS)spectrum of the irregular component (S
+     &EATS)spectrum of the extended residuals (SEATS)spectrum of differe
+     &nced indirect seasonally adjusted seriesspectrum of indirect modif
+     &ied irregular componentspectrum of the composite seriesTukey spect
+     &rum of the original seriesTukey spectrum of the regARIMA model res
+     &idualsTukey spectrum of differenced seasonally adjusted seriesTuke
+     &y spectrum of modified irregular seriesTukey spectrum of the seaso
+     &nally adjusted series (SEATS)Tukey spectrum of the irregular compo
+     &nent (SEATS)Tukey spectrum of the extended residuals (SEATS)Tukey 
+     &spectrum of differenced indirect seasonally adjusted seriesTukey s
+     &pectrum of indirect modified irregular componentTukey spectrum of 
+     &the composite seriesQS diagnostic to detect seasonalityPeak probab
+     &ilties for the Tukey spectrum')

@@ -1,0 +1,2 @@
+      LOGICAL level
+      DIMENSION level(NTBL,NLVL)

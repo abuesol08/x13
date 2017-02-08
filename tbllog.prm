@@ -1,0 +1,3 @@
+      INTEGER NTBL
+      PARAMETER(NTBL=390)
+

@@ -1,0 +1,48 @@
+      CHARACTER DSFDIC*2861
+      INTEGER dsfptr,PDSF
+      PARAMETER(PDSF=390)
+      DIMENSION dsfptr(0:PDSF)
+      PARAMETER(DSFDIC='forecasts of (prior adjusted) original seriesreg
+     &ARIMA outlier componentregARIMA temporary change outlier component
+     &regARIMA temporary change outlier componentregARIMA trading day co
+     &mponent forecastsregARIMA holiday component forecastsregARIMA user
+     &-defined regression component forecastsregARIMA seasonal component
+     & forecastsregARIMA transitory component forecastsfinal seasonal co
+     &mponent forecastsfinal seasonal component forecastsfinal seasonal 
+     &difference forecastsfinal seasonal component forecasts, adjusted f
+     &or regARIMA seasonal componentseasonal factors forecasts, before s
+     &hrinkage appliedX-11 Easter adjustment factor forecastscombined ho
+     &liday component forecastscombined adjustment component forecastsco
+     &mbined adjustment component forecastsfinal adjustment difference f
+     &orecastscombined calendar adjustment component forecastsfinal adju
+     &stment ratio forecaststotal adjustment factor forecastsforecasted 
+     &factors applied to get adjusted series with forced yearly totalspr
+     &ior trading day component forecastsfinal irregular component regre
+     &ssion trading day component forecastsfinal irregular component reg
+     &ression trading day component forecastsfinal irregular component r
+     &egression holiday component forecastsfinal irregular component reg
+     &ression calendar component forecastsfinal irregular component regr
+     &ession combined calendar component forecastsforecasts of (prior ad
+     &justed) original seriesfinal indirect seasonal component forecasts
+     &final indirect seasonal component forecastsindirect final seasonal
+     & difference forecastsfinal indirect adjustment ratio forecastsindi
+     &rect total adjustment factor forecastsfinal indirect calendar comp
+     &onent forecastsfinal indirect adjustment component forecastsfinal 
+     &indirect adjustment component forecastsforecasted factors applied 
+     &to get indirect adjusted series with forced yearly totalsFinal tre
+     &nd component forecast (SEATS)Final trend component forecast with c
+     &onstant added (SEATS)Final seasonal component forecast (SEATS)Fina
+     &l seasonal component forecast (SEATS)Final irregular component for
+     &ecast (SEATS)Final irregular component forecast (SEATS)Final seaso
+     &nally adjusted series forecast (SEATS)Final seasonally adjusted se
+     &ries forecast with constant added (SEATS)Final transitory componen
+     &t forecast (SEATS)Final transitory component forecast (SEATS)Final
+     & combined adjustment factor forecast (SEATS)Final combined adjustm
+     &ent factor forecast (SEATS)final adjustment ratio forecasts (SEATS
+     &)total adjustment factor forecasts (SEATS)Final differenced foreca
+     &st after transformation, prior adjustment (SEATS)Final differenced
+     & seasonally adjusted series forecast (SEATS)Final differenced tren
+     &d forecast (SEATS)Final seasonal component forecast (SEATS)final c
+     &ycle forecastfinal long term trend forecastFinal seasonally adjust
+     &ed series forecast adjusted for outliers (SEATS)Final irregular co
+     &mponent forecast outlier adjusted (SEATS)')
