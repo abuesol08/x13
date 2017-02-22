@@ -1,2 +1,0 @@
-      LOGICAL sumtab
-      DIMENSION sumtab(NTBL)

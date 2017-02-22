@@ -1,2 +1,0 @@
-      CHARACTER tbxdic*3
-      DIMENSION tbxdic(NTBL)
