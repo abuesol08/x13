@@ -1,15 +1,15 @@
-# MKMF template makefile for protected mode executables.
-FC        = gfortran
-LINKER    = gfortran
-PROGRAM         = x13asv11b26o1
-DEST      = .
-EXTHDRS         =
-FFLAGS    = -O1
-HDRS            =
-LDFLAGS   = -s
+FC        ?= gfortran
+LINKER    ?= gfortran
+PROGRAM   ?= x13
+DEST      ?= .
+EXTHDRS   =
+FFLAGS    ?= -O1
+HDRS      =
+LDFLAGS   ?= -s
 LDMAP     = 
 LIBS      =
 MAKEFILE  = Makefile
+
 OBJS            = aaamain.o abend.o acf.o acfar.o acfdgn.o \
                   acfhdr.o addadj.o addaic.o addate.o addeas.o \
                   addfix.o addlom.o addmat.o addmul.o addotl.o \
@@ -287,14 +287,16 @@ SRCS            = aaamain.f abend.f acf.f acfar.f acfdgn.f \
                   compcrodiag.f phasegain.f altundovrtst.f \
                   getrevdec.f
 
-$(PROGRAM):     $(OBJS) $(LIBS)
+$(PROGRAM): $(OBJS) $(LIBS)
 	$(LINKER) -static -o $@ $(OBJS) $(LDMAP) $(LIBS) $(LDFLAGS)
 
-clean:;         @rm -f $(OBJS)
+clean:
+	@rm -f $(OBJS)
 
-install:   $(PROGRAM)
+install: $(PROGRAM)
 	@echo Installing $(PROGRAM) in $(DEST)
 	@if not $(DEST)x==.x copy $(PROGRAM) $(DEST)
+
 ### OPUS MKMF:  Do not remove this line!  Automatic dependencies follow.
 
 aaamain.o:  build.prm cchars.i chrt.cmn error.cmn hiddn.cmn lex.i \
