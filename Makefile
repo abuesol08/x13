@@ -14,6 +14,13 @@
 
 include ./configure.inc
 
+ifeq ($(wildcard remote.inc),)
+REMOTE_CONFIGURATION_FILE=0
+else
+include ./remote.inc
+REMOTE_CONFIGURATION_FILE=1
+endif
+
 ROOT_PATH := ${CURDIR}
 
 all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
@@ -47,6 +54,35 @@ binaries/windows/64/x13.exe: src/Makefile
 	cp tmp/windows/64/x13.exe binaries/windows/64/x13.exe
 	rm -rf tmp/windows/64
 
+src/${SRC_REMOTE_FILE}:
+	cd src; wget ${SRC_REMOTE_ADDRESS}${SRC_REMOTE_FILE}
+
+src/Makefile: src/${SRC_REMOTE_FILE}
+	cd src; tar xvf ${SRC_REMOTE_FILE}; mv makefile.gf Makefile; patch Makefile < ../patches/Makefile.patch
+
+x13.zip: all
+	zip -r x13.zip binaries
+
+x13.tar.xz: all
+	XZ_OPT=-9 tar cJvf x13.tar.xz binaries
+
+push: x13.zip x13.tar.xz
+ifeq ($(REMOTE_CONFIGURATION_FILE),1)
+ifeq ($(REMOTE_SERVER),)
+	@echo "You need to specify a remote server in the configuration file!"
+else
+ifeq ($(REMOTE_PATH),)
+	@echo "You need to specify a remote path in the configuration file!"
+else
+	scp x13.zip ${REMOTE_SERVER}:${REMOTE_PATH}
+	scp x13.tar.xz ${REMOTE_SERVER}:${REMOTE_PATH}
+endif
+endif
+else
+	@echo "The push rule is not available!"
+	@echo "Please install the remote.inc configuration file."
+endif
+
 clean-tarballs:
 	rm src/*.tar.gz
 
@@ -56,10 +92,8 @@ clean-sources:
 clean-binaries:
 	rm -f binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
 
+clean-archives:
+	rm *.zip *.tar.xz
+
 clean-all: clean-tarballs clean-sources clean-binaries
 
-src/${SRC_REMOTE_FILE}:
-	cd src; wget ${SRC_REMOTE_ADDRESS}${SRC_REMOTE_FILE}
-
-src/Makefile: src/${SRC_REMOTE_FILE}
-	cd src; tar xvf ${SRC_REMOTE_FILE}; mv makefile.gf Makefile; patch Makefile < ../patches/Makefile.patch

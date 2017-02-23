@@ -2,4 +2,4 @@ Compilation of x13 for linux/windows 32/64 bits targets is triggered by the foll
 ```shell
 ~$ make -j4
 ```
-The only requirements are `make`, `gfortran` and `mingw-w64`.
+The only requirements are `make`, `gfortran` and `mingw-w64`. The `push` rule is available only if the variables `REMOTE_SERVER` and `REMOTE_PATH` are set in a file called `remote.inc`.
