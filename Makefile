@@ -12,9 +12,12 @@
 #
 # GPLv3 license is available at <http://www.gnu.org/licenses/>.
 
+include ./configure.inc
+
 ROOT_PATH := ${CURDIR}
 
-all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe tmp
+all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
+	rm -rf tmp
 
 binaries/linux/32/x13: src/Makefile
 	mkdir -p tmp/linux/32
@@ -44,9 +47,6 @@ binaries/windows/64/x13.exe: src/Makefile
 	cp tmp/windows/64/x13.exe binaries/windows/64/x13.exe
 	rm -rf tmp/windows/64
 
-clean: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
-	rm -rf tmp
-
 clean-tarballs:
 	rm src/*.tar.gz
 
@@ -56,11 +56,10 @@ clean-sources:
 clean-binaries:
 	rm -f binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
 
-clean-all:
-	clean clean-tarballs clean-sources clean-binaries
+clean-all: clean-tarballs clean-sources clean-binaries
 
-src/x13assrc_V1.1_B26.tar.gz:
-	cd src; wget https://www.census.gov/ts/x13as/unix/x13assrc_V1.1_B26.tar.gz
+src/${SRC_REMOTE_FILE}:
+	cd src; wget ${SRC_REMOTE_ADDRESS}${SRC_REMOTE_FILE}
 
-src/Makefile: src/x13assrc_V1.1_B26.tar.gz
-	cd src; tar xvf x13assrc_V1.1_B26.tar.gz; mv makefile.gf Makefile; patch Makefile < ../patches/Makefile.patch
+src/Makefile: src/${SRC_REMOTE_FILE}
+	cd src; tar xvf ${SRC_REMOTE_FILE}; mv makefile.gf Makefile; patch Makefile < ../patches/Makefile.patch
