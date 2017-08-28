@@ -4,10 +4,10 @@
 -# MKMF template makefile for protected mode executables.
 -FC        = gfortran
 -LINKER    = gfortran
--PROGRAM         = x13asv11b26o1
+-PROGRAM         = x13asv11b39
 -DEST      = .
 -EXTHDRS         =
--FFLAGS    = -O1
+-FFLAGS    = -O0
 -HDRS            =
 -LDFLAGS   = -s
 +FC        ?= gfortran
@@ -15,7 +15,7 @@
 +PROGRAM   ?= x13
 +DEST      ?= .
 +EXTHDRS   =
-+FFLAGS    ?= -O1
++FFLAGS    ?= -O0
 +HDRS      =
 +LDFLAGS   ?= -s
  LDMAP     = 
