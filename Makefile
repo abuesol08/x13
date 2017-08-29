@@ -34,7 +34,7 @@ osxcross: modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran
 
 modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran: modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz
 	cd modules/osxcross; UNATTENDED=0  ./build.sh
-	cd modules/osxcross; ENABLE_GFORTRAN=1 ./build_gcc.sh
+	cd modules/osxcross; ENABLE_FORTRAN=1 ./build_gcc.sh
 
 modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz:
 	wget https://dynare.adjemian.eu/osx/$(OSX_SDK_VERSION)/sdk.tar.xz -O sdk.tar.xz
