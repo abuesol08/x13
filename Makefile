@@ -12,6 +12,8 @@
 #
 # GPLv3 license is available at <http://www.gnu.org/licenses/>.
 
+OSX_SDK_VERSION=10.11
+
 include ./configure.inc
 
 ifeq ($(wildcard remote.inc),)
@@ -23,8 +25,20 @@ endif
 
 ROOT_PATH := ${CURDIR}
 
+.PHONY: all osxcross clean-tarballs clean-sources clean-binaries clean-archives clean-all clean-osxcross
+
 all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
 	rm -rf tmp
+
+osxcross: modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran
+
+modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran: modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz
+	cd modules/osxcross; UNATTENDED=0  ./build.sh
+	cd modules/osxcross; ENABLE_GFORTRAN=1 ./build_gcc.sh
+
+modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz:
+	wget https://dynare.adjemian.eu/osx/$(OSX_SDK_VERSION)/sdk.tar.xz -O sdk.tar.xz
+	mv sdk.tar.xz $@
 
 binaries/linux/32/x13: src/Makefile
 	mkdir -p tmp/linux/32
@@ -97,3 +111,5 @@ clean-archives:
 
 clean-all: clean-tarballs clean-sources clean-binaries
 
+clean-osxcross:
+	cd modules/osxcross; git clean -xd
