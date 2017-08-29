@@ -112,4 +112,4 @@ clean-archives:
 clean-all: clean-tarballs clean-sources clean-binaries
 
 clean-osxcross:
-	cd modules/osxcross; git clean -xd
+	cd modules/osxcross; git clean -xfd
