@@ -33,8 +33,8 @@ all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe bin
 osxcross: modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran
 
 modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran: modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz
-	cd modules/osxcross; UNATTENDED=0  ./build.sh
-	cd modules/osxcross; ENABLE_FORTRAN=1 ./build_gcc.sh
+	cd modules/osxcross; UNATTENDED=1  ./build.sh
+	cd modules/osxcross; GCC_VERSION=6.4.0 ENABLE_FORTRAN=1 ./build_gcc.sh
 
 modules/osxcross/tarballs/MacOSX$(OSX_SDK_VERSION).sdk.tar.xz:
 	wget https://dynare.adjemian.eu/osx/$(OSX_SDK_VERSION)/sdk.tar.xz -O sdk.tar.xz
