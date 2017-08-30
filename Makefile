@@ -68,6 +68,13 @@ binaries/windows/64/x13.exe: src/Makefile
 	cp tmp/windows/64/x13.exe binaries/windows/64/x13.exe
 	rm -rf tmp/windows/64
 
+binaries/osx/64/x13: src/Makefile
+	mkdir -p tmp/osx/64
+	cp src/* tmp/osx/64
+	cd tmp/osx/64; export PATH=$(ROOT_PATH)/modules/osxcross/target/bin:$(PATH);  make FC=x86_64-apple-darwin15-gfortran  FFLAGS="-m64 -fno-leading-underscore -fno-underscoring" LINKER=x86_64-apple-darwin15-ld  LDFLAGS="" PROGRAMM=x13 #"-L$(ROOT_PATH)/modules/osxcross/target/x86_64-apple-darwin15/lib -lgfortran" PROGRAM=x13
+	cp tmp/osx/64/x13 binaries/osx/64/x13
+	rm -rf tmp/linux/64
+
 src/${SRC_REMOTE_FILE}:
 	cd src; wget ${SRC_REMOTE_ADDRESS}${SRC_REMOTE_FILE}
 
