@@ -97,10 +97,10 @@ src/Makefile: src/${SRC_REMOTE_FILE}
 	cd src; tar xvf ${SRC_REMOTE_FILE}; mv makefile.gf Makefile; patch Makefile < ../patches/Makefile.patch
 
 x13.zip: all
-	zip -r x13.zip binaries
+	zip -r x13.zip binaries -x *.gitignore
 
 x13.tar.xz: all
-	XZ_OPT=-9 tar cJvf x13.tar.xz binaries
+	XZ_OPT=-9 tar -c -c --exclude-from=.tarignore -Jvf x13.tar.xz binaries
 
 push: x13.zip x13.tar.xz
 ifeq ($(REMOTE_CONFIGURATION_FILE),1)

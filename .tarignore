@@ -1,0 +1,6 @@
+binaries/linux/32/.gitignore
+binaries/linux/64/.gitignore
+binaries/osx/32/.gitignore
+binaries/osx/64/.gitignore
+binaries/windows/32/.gitignore
+binaries/windows/64/.gitignore
