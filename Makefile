@@ -27,7 +27,7 @@ ROOT_PATH := ${CURDIR}
 
 .PHONY: all osxcross clean-tarballs clean-sources clean-binaries clean-archives clean-all clean-osxcross
 
-all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
+all: binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe binaries/osx/32/x13 binaries/osx/64/x13
 	rm -rf tmp
 
 osxcross: modules/osxcross/target/bin/x86_64-apple-darwin15-gfortran
@@ -69,11 +69,26 @@ binaries/windows/64/x13.exe: src/Makefile
 	rm -rf tmp/windows/64
 
 binaries/osx/64/x13: src/Makefile
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib.cache
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib.cache
 	mkdir -p tmp/osx/64
 	cp src/* tmp/osx/64
-	cd tmp/osx/64; export PATH=$(ROOT_PATH)/modules/osxcross/target/bin:$(PATH);  make FC=x86_64-apple-darwin15-gfortran  FFLAGS="-m64 -fno-leading-underscore -fno-underscoring" LINKER=x86_64-apple-darwin15-ld  LDFLAGS="" PROGRAMM=x13 #"-L$(ROOT_PATH)/modules/osxcross/target/x86_64-apple-darwin15/lib -lgfortran" PROGRAM=x13
+	cd tmp/osx/64; patch Makefile < ../../../patches/Makefile.osx.patch; export PATH=$(ROOT_PATH)/modules/osxcross/target/bin:$(PATH);  make FC=x86_64-apple-darwin15-gfortran  FFLAGS="-m64" LINKER=x86_64-apple-darwin15-gfortran LDFLAGS="-static-libgcc -static-libgfortran"  PROGRAMM=x13
 	cp tmp/osx/64/x13 binaries/osx/64/x13
-	rm -rf tmp/linux/64
+	rm -rf tmp/osx/64
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib.cache modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib.cache modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib
+
+binaries/osx/32/x13: src/Makefile
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib.cache
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib.cache
+	mkdir -p tmp/osx/32
+	cp src/* tmp/osx/32
+	cd tmp/osx/32; patch Makefile < ../../../patches/Makefile.osx.patch; export PATH=$(ROOT_PATH)/modules/osxcross/target/bin:$(PATH);  make FC=x86_64-apple-darwin15-gfortran  FFLAGS="-m32" LINKER=x86_64-apple-darwin15-gfortran LDFLAGS="-m32 -static-libgcc -static-libgfortran"  PROGRAMM=x13
+	cp tmp/osx/32/x13 binaries/osx/32/x13
+	rm -rf tmp/osx/32
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib.cache modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.dylib
+	mv modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib.cache modules/osxcross/target/x86_64-apple-darwin15/lib/libquadmath.0.dylib
 
 src/${SRC_REMOTE_FILE}:
 	cd src; wget ${SRC_REMOTE_ADDRESS}${SRC_REMOTE_FILE}

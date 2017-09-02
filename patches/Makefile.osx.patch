@@ -1,0 +1,11 @@
+--- Makefile	2017-09-01 18:04:35.825494849 +0200
++++ Makefile	2017-09-02 07:54:49.040617509 +0200
+@@ -288,7 +288,7 @@
+                   getrevdec.f m2q.f chqsea.f
+ 
+ $(PROGRAM): $(OBJS) $(LIBS)
+-	$(LINKER) -static -o $@ $(OBJS) $(LDMAP) $(LIBS) $(LDFLAGS)
++	$(LINKER) -o $@ $(OBJS) $(LDMAP) $(LIBS) $(LDFLAGS)
+ 
+ clean:
+ 	@rm -f $(OBJS)
