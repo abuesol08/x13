@@ -57,14 +57,14 @@ binaries/linux/64/x13: src/Makefile
 binaries/windows/32/x13.exe: src/Makefile
 	mkdir -p tmp/windows/32
 	cp src/* tmp/windows/32
-	cd tmp/windows/32; make FC=i686-w64-mingw32-gfortran LINKER=i686-w64-mingw32-gfortran FFLAGS=-O1 PROGRAM=x13.exe
+	cd tmp/windows/32;  make FC=i686-w64-mingw32-gfortran LINKER=i686-w64-mingw32-gfortran FFLAGS="-O2" PROGRAM=x13.exe
 	cp tmp/windows/32/x13.exe binaries/windows/32/x13.exe
 	rm -rf tmp/windows/32
 
 binaries/windows/64/x13.exe: src/Makefile
 	mkdir -p tmp/windows/64
 	cp src/* tmp/windows/64
-	cd tmp/windows/64; make FC=x86_64-w64-mingw32-gfortran LINKER=x86_64-w64-mingw32-gfortran FFLAGS=-O1 PROGRAM=x13.exe
+	cd tmp/windows/64;  make FC=x86_64-w64-mingw32-gfortran LINKER=x86_64-w64-mingw32-gfortran FFLAGS="-O2" PROGRAM=x13.exe
 	cp tmp/windows/64/x13.exe binaries/windows/64/x13.exe
 	rm -rf tmp/windows/64
 
