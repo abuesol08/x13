@@ -126,7 +126,9 @@ clean-sources:
 	rm src/*.i src/*.f src/*.prm src/*.cmn src/*.var src/Makefile
 
 clean-binaries:
-	rm -f binaries/linux/32/x13 binaries/linux/64/x13 binaries/windows/32/x13.exe binaries/windows/64/x13.exe
+	rm -f binaries/linux/32/x13 binaries/linux/64/x13
+	rm -f binaries/windows/32/x13.exe binaries/windows/64/x13.exe
+	rm -f binaries/osx/32/x13 binaries/osx/64/x13
 
 clean-archives:
 	rm *.zip *.tar.xz
