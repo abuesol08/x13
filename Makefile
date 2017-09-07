@@ -102,6 +102,12 @@ x13.zip: all
 x13.tar.xz: all
 	XZ_OPT=-9 tar -c -c --exclude-from=.tarignore -Jvf x13.tar.xz binaries
 
+windows: binaries/windows/64/x13.exe binaries/windows/32/x13.exe
+
+osx: binaries/osx/64/x13 binaries/osx/32/x13
+
+linux: binaries/linux/64/x13 binaries/linux/32/x13
+
 push: x13.zip x13.tar.xz
 ifeq ($(REMOTE_CONFIGURATION_FILE),1)
 ifeq ($(REMOTE_SERVER),)
